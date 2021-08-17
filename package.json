@@ -1,0 +1,22 @@
+{
+  "name": "daily-byte",
+  "version": "1.0.0",
+  "description": "A repository to house the code snippets from the daily byte service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccfreem/daily-byte.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ccfreem/daily-byte/issues"
+  },
+  "homepage": "https://github.com/ccfreem/daily-byte#readme",
+  "dependencies": {
+    "jest": "^27.0.6"
+  }
+}
