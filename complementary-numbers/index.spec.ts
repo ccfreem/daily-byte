@@ -1,4 +1,4 @@
-const complimentaryNumber = require("./index");
+import complimentaryNumber from './index'
 
 describe("Complementary number", () => {
   it("should find complement", () => {

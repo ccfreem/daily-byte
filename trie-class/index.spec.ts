@@ -1,4 +1,4 @@
-const Trie = require("./index");
+import Trie from './index'
 
 describe("Trie", () => {
   it("should insert", () => {

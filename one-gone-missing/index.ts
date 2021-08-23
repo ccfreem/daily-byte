@@ -11,4 +11,4 @@ const missingNumber = (arr) => {
   return missing;
 };
 
-module.exports = missingNumber;
+export default missingNumber;

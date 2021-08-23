@@ -16,7 +16,15 @@
     "url": "https://github.com/ccfreem/daily-byte/issues"
   },
   "homepage": "https://github.com/ccfreem/daily-byte#readme",
-  "dependencies": {
-    "jest": "^27.0.6"
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-typescript": "^7.15.0",
+    "@types/jest": "^27.0.1",
+    "babel-jest": "^27.0.6",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.5",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.3.5"
   }
 }

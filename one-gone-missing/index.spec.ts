@@ -1,4 +1,4 @@
-const missingNumber = require("./index");
+import missingNumber from './index'
 
 describe("Missing nums", () => {
   it("should return the missing number for first example", () => {

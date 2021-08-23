@@ -1,4 +1,5 @@
 class Trie {
+  root;
   constructor() {
     this.root = [];
   }
