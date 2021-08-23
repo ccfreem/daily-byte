@@ -1,4 +1,4 @@
-import Trie from "./index";
+import Trie from "./tri";
 
 describe("Trie", () => {
   it("should insert", () => {
