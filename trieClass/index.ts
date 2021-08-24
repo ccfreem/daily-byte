@@ -53,7 +53,7 @@ class Trie {
     return true;
   }
 
-  autoComplete(prefix: string) {
+  autocomplete(prefix: string) {
     if (!prefix) return [];
 
     let node = this.root;

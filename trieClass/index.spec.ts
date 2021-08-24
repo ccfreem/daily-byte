@@ -42,8 +42,8 @@ describe("Trie", () => {
     words.forEach((w) => trie.insert(w));
 
     // Act
-    const autoCompleteDo = trie.autoComplete("do");
-    const autoCompleteD = trie.autoComplete("d");
+    const autoCompleteDo = trie.autocomplete("do");
+    const autoCompleteD = trie.autocomplete("d");
 
     // Assert
     expect(autoCompleteDo).toStrictEqual(["dog"]);
@@ -57,7 +57,7 @@ describe("Trie", () => {
     words.forEach((w) => trie.insert(w));
 
     // Act
-    const autoCompleteDo = trie.autoComplete("do");
+    const autoCompleteDo = trie.autocomplete("do");
 
     // Assert
     expect(autoCompleteDo).toStrictEqual(["dog", "door"]);
@@ -70,7 +70,7 @@ describe("Trie", () => {
     words.forEach((w) => trie.insert(w));
 
     // Act
-    const autoCompleteDo = trie.autoComplete("b");
+    const autoCompleteDo = trie.autocomplete("b");
 
     // Assert
     expect(autoCompleteDo).toStrictEqual(["bird"]);
