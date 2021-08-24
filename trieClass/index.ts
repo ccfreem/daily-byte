@@ -52,6 +52,34 @@ class Trie {
 
     return true;
   }
+
+  autoComplete(prefix: string) {
+    if (!prefix) return [];
+
+    let node = this.root;
+    let result = [];
+    for (let i = 0; i < prefix.length; i++) {
+      const char = prefix[i];
+      if (!node.children[char]) break;
+      node = node.children[char];
+      if (i === prefix.length - 1) {
+        const queue = [];
+        queue.push([node, prefix]);
+        while (queue.length) {
+          const [node, word] = queue.shift();
+          if (node.isEnd) {
+            result.push(word);
+          }
+          for (const j in node.children) {
+            const child = node.children[j];
+            const childWord = word + child.value;
+            queue.push([child, childWord]);
+          }
+        }
+      }
+    }
+    return result;
+  }
 }
 
 export default Trie;
