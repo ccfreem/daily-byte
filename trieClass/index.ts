@@ -1,24 +1,11 @@
 class TrieNode {
-  children: TrieNode[];
-  isEndWord: boolean;
-  char: string;
-  constructor(char: string) {
-    this.children = [];
-    for (let i = 0; i < 26; i++) {
-      this.children[i] = null;
-    }
-    this.isEndWord = false; // will be true if the node represents the end of word
-    this.char = char; // To store the value of a particular key
-  }
-
-  // Function to mark the currentNode as Leaf
-  markAsLeaf() {
-    this.isEndWord = true;
-  }
-
-  // Function to unMark the currentNode as Leaf
-  unMarkAsLeaf() {
-    this.isEndWord = false;
+  value: string;
+  isEnd: boolean;
+  children: TrieNode | {};
+  constructor(value: string) {
+    this.value = value;
+    this.isEnd = false;
+    this.children = {};
   }
 }
 
@@ -27,64 +14,43 @@ class Trie {
   constructor() {
     this.root = new TrieNode("");
   }
-  getIndex(t: string) {
-    return t.charCodeAt(0) - "a".charCodeAt(0);
+
+  insert(word: string): void {
+    if (!word) return;
+    // Start with the root
+    let node = this.root;
+    for (let i = 0; i < word.length; i++) {
+      const c = word[i];
+      // If the current node doesn't have a child node for this character
+      // create one
+      if (!node.children[c]) {
+        node.children[c] = new TrieNode(c);
+      }
+      // Move the current node to the child node of the current character
+      node = node.children[c];
+      // If this is the last character of the word, the node for this charater
+      // is now the representative of the word
+      if (i === word.length - 1) {
+        node.isEnd = true;
+      }
+    }
   }
 
-  insert(key: string) {
-    if (key == null) {
-      return;
+  search(word: string) {
+    if (!word) return false;
+
+    // search for a child nodetrie for the first character - if not, return false
+    let node = this.root;
+    for (let i = 0; i < word.length; i++) {
+      const c = word[i];
+      if (!node.children[c]) return false;
+      node = node.children[c];
+      // If we are at the end of the string and this node is not flagged as an end,
+      // then its not a word
+      if (i === word.length - 1 && !node.isEnd) return false;
     }
 
-    key = key.toLowerCase();
-    let currentNode = this.root as TrieNode;
-    let index = 0;
-
-    // Store the character index
-    // Iterate the trie with the given character index,
-    // If the index points to null
-    // simply create a TrieNode and go down a level
-    for (let level = 0; level < key.length; level++) {
-      index = this.getIndex(key[level]);
-
-      if (currentNode.children[index] == null) {
-        currentNode.children[index] = new TrieNode(key[level]);
-        console.log(String(key[level]) + " inserted");
-      }
-      currentNode = currentNode.children[index];
-    }
-
-    //Mark the end character as leaf node
-    currentNode.markAsLeaf();
-    console.log("'" + key + "' inserted");
-  }
-
-  //Function to search a given key in Trie
-  search(key) {
-    if (key == null) {
-      return false; //null key
-    }
-
-    key = key.toLowerCase();
-    let currentNode = this.root;
-    let index = 0;
-
-    //Iterate the Trie with given character index,
-    //If it is null at any point then we stop and return false
-    //We will return true only if we reach leafNode and have traversed the
-    //Trie based on the length of the key
-
-    for (var level = 0; level < key.length; level++) {
-      index = this.getIndex(key[level]);
-      if (currentNode.children[index] == null) {
-        return false;
-      }
-      currentNode = currentNode.children[index];
-    }
-    if (currentNode != null && currentNode.isEndWord) {
-      return true;
-    }
-    return false;
+    return true;
   }
 }
 
