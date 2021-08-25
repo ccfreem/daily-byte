@@ -1,7 +1,10 @@
+type ChildrenOfNode = {
+  [key: string]: TrieNode;
+};
 class TrieNode {
   value: string;
   isEnd: boolean;
-  children: TrieNode | {};
+  children: ChildrenOfNode;
   constructor(value: string) {
     this.value = value;
     this.isEnd = false;
@@ -57,22 +60,31 @@ class Trie {
     if (!prefix) return [];
 
     let node = this.root;
-    let result = [];
+    let result = [] as string[];
     for (let i = 0; i < prefix.length; i++) {
       const char = prefix[i];
+
+      // Break out if we are out of character nodes
       if (!node.children[char]) break;
+
+      // Set the current node to the child
       node = node.children[char];
+
+      type NodeQueue = [TrieNode, string];
+      // If we have reached the end of the prefix, we
+      // can start our breadth first search
       if (i === prefix.length - 1) {
-        const queue = [];
+        const queue = [] as NodeQueue[];
         queue.push([node, prefix]);
         while (queue.length) {
-          const [node, word] = queue.shift();
+          const [node, word] = queue.shift() as NodeQueue;
           if (node.isEnd) {
             result.push(word);
           }
           for (const j in node.children) {
-            const child = node.children[j];
-            const childWord = word + child.value;
+            const child = node.children[j] as TrieNode;
+            const childWord: string = word + child.value;
+            console.log(childWord);
             queue.push([child, childWord]);
           }
         }
@@ -82,4 +94,12 @@ class Trie {
   }
 }
 
+const testTrie = new Trie();
+
+testTrie.insert("test");
+testTrie.insert("testing");
+testTrie.insert("tester");
+testTrie.insert("testish");
+testTrie.insert("testy");
+testTrie.autocomplete("testi");
 export default Trie;
