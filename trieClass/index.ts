@@ -76,6 +76,7 @@ class Trie {
       if (i === prefix.length - 1) {
         const queue = [] as NodeQueue[];
         queue.push([node, prefix]);
+
         while (queue.length) {
           const [node, word] = queue.shift() as NodeQueue;
           if (node.isEnd) {
@@ -84,7 +85,6 @@ class Trie {
           for (const j in node.children) {
             const child = node.children[j] as TrieNode;
             const childWord: string = word + child.value;
-            console.log(childWord);
             queue.push([child, childWord]);
           }
         }
@@ -93,13 +93,4 @@ class Trie {
     return result;
   }
 }
-
-const testTrie = new Trie();
-
-testTrie.insert("test");
-testTrie.insert("testing");
-testTrie.insert("tester");
-testTrie.insert("testish");
-testTrie.insert("testy");
-testTrie.autocomplete("testi");
 export default Trie;
